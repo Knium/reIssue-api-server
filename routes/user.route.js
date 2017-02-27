@@ -4,10 +4,12 @@ const express = require("express");
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
+const dummy = {
+    username: "test"
+};
 
-/* GET users listing. */
 router.get("/", (req, res) => {
-    res.send("respond with a resource");
+    res.json(dummy);
 });
 
 module.exports = router;
