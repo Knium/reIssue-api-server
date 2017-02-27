@@ -1,6 +1,7 @@
+const mongoose = require("mongoose");
 const config = {
-    port: 27017,
-    dbName: "reIssue"
+    host: "localhost"
 };
 
-export default config;
+mongoose.connect(`mongodb://${config.host}/repoty_dev`);
+module.exports = mongoose;
