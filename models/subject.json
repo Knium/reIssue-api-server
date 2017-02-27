@@ -1,0 +1,32 @@
+// 科目コレクション フィールド案
+
+{
+	"id": { // ユニークなID
+		"type": "ObjectID",
+		"required": true
+	},
+	"name": { // 教科名
+		"type": "string",
+		"required": true
+	},
+	"teacher": { // 科目担当者名
+		"type": "string",
+		"required": true
+	},
+	"who_is_taking": { // 誰が履修をしているか．各ユーザのObjectIDを要素にした配列の予定
+		"type": "array",
+		"required": true
+	},
+	"past_report": {   // 過去レポの置いてあるURLまでのAWS S3のURLを格納する配列の予定
+		"type": "array",
+		"required": false
+	},
+	"classroom": { // 教室
+		"type": "string",
+		"required": false
+	},
+	"semester": { // 第何学期から履修できるのか 自然数 1年前期は1，1年後期は2, ... 4年後期は8といった風に
+		"type": "number",
+		"required": false
+	}
+}
