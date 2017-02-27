@@ -1,0 +1,25 @@
+// チャットのログのコレクション フィールド案
+
+
+{
+	"id": { // ユニークなID
+		"type": "ObjectID",
+		"required": true
+	},
+	"speaker": { // 発言者, ユーザのObjectID
+		"type": "string",
+		"required": true
+	},
+	"date": { // 発言した時間
+		"type": "date",
+		"required": true
+	},
+	"subject": { // 教科のObjectID
+		"type": "ObjectID",
+		"required": true
+	},
+	"text": {
+		"type": "string",
+		"required": true
+	}
+}
