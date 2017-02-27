@@ -1,17 +1,18 @@
-// 利用者コレクション フィールド案
-// 
+const mongoose = require("../config");
 
-{
-	"id": { // ユニークなID
-		"type": "ObjectID",
-		"required": true
-	},
-	"name": { // ユーザ名
-		"type": "string",
-		"required": true
-	},
-	"completed": { // 履修が完了した科目一覧
-		"type": "array",
-		"required": true
-	}
-}
+const userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    completed: {
+        type: Array,
+        required: true
+    },
+    failedClass: {
+        type: Array,
+        required: true
+    }
+});
+
+module.exports = mongoose.model("User", userSchema);
