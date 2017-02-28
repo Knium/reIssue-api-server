@@ -6,11 +6,7 @@ const User = require('../models/user.model');
  */
 function get(req, res) {
   User.find({}).exec()
-  .then(
-      (users) => {
-        res.json(users);
-      },
-  );
+  .then((users) => { res.json(users); });
 }
 
 /**
