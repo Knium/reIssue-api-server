@@ -1,18 +1,10 @@
 const mongoose = require("../config");
-
+const ObjectId = mongoose.Schema.Types.ObjectId;
 const userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true
-    },
-    completed: {
-        type: Array,
-        required: true
-    },
-    failedClass: {
-        type: Array,
-        required: true
-    }
+    username: String,
+    completed: [ObjectId],  // 取った科目
+    failedClass: [ObjectId], // 落とした科目
+    created: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model("User", userSchema);
