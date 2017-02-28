@@ -6,6 +6,7 @@
         "node": true
     },
     "rules": {
-        "strict": "off"
+        "strict": "off",
+        "valid-jsdoc": "off"
     }
 }
