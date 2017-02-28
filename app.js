@@ -14,15 +14,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', index);
 app.use(serveStatic(`${__dirname}/public`));
 
-const connects = [];
+const room = { // TODO: 全科目分のキー
+  A: [],
+  B: [],
+};
 app.ws('/api/chatlog', (ws) => {
-  connects.push(ws);
-  console.log(ws);
   ws.on('message', (msg) => {
-    chatCtrl.create(msg);
-    connects.forEach((socket) => {
-      socket.send(msg);
-    });
+    if (msg === 'A') { // TODO 全科目分やるのでもっといい方法を考える.
+      room.A.push(ws);
+    } else if (msg === 'B') {
+      room.B.push(ws);
+    } else {
+      chatCtrl.create(msg);
+      room.A.forEach((socket) => {
+        socket.send(msg);
+      });
+    }
   });
 });
 
