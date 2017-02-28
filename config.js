@@ -1,6 +1,8 @@
+const mongoose = require("mongoose");
 const config = {
-    port: 27017,
-    dbName: "reIssue"
+    host: "localhost",
+    db: "reIssue_dev"
 };
 
-export default config;
+mongoose.connect(`mongodb://${config.host}/${config.db}`);
+module.exports = mongoose;
