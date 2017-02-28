@@ -1,9 +1,13 @@
 (function() {
   var HOST = 'ws://localhost:3000/api/chatlog';
   var ws = new WebSocket(HOST);
-
+  const room = { 0: 'A', 1: 'B' };
+  const rand = Math.floor( Math.random() * 2);
+  console.log(room[rand]);
   var form = document.querySelector('.form');
-
+  ws.onopen = function () { // 接続を確認してからルーム別用の識別子msgを送る．
+     ws.send(`${room[rand]}`);
+  };
   form.onsubmit = function() {
     var input = document.querySelector('.input');
     var text = input.value;
