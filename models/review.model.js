@@ -12,5 +12,5 @@ const reviewSchema = new mongoose.Schema({
   result: Number, // そんな偉そうなレビュー書いてるけど君秀とったの？ 0 -> 不可, 1 -> 可, .. 4 -> 秀 という風な感じかな
 });
 
-module.exports = mongoose.model('User', reviewSchema);
+module.exports = mongoose.model('Review', reviewSchema);
 
