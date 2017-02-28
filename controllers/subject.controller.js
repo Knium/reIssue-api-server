@@ -1,10 +1,12 @@
 const Subject = require('../models/subject.model');
 
 function get(req, res) {
-  return Subject.find({})
-  .exec((err, subject) => {
-    res.json(subject);
-  });
+  Subject.find({}).exec()
+    .then(
+      (subjects) => {
+        res.json(subjects);
+      },
+  );
 }
 
 module.exports = { get };
