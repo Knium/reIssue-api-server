@@ -8,6 +8,8 @@ const subjectSchema = new mongoose.Schema({
   pastReport: [String], // 過去レポのURL
   classRoom: String, // 教室名
   semester: Number, // 第何学期から履修できるのか 自然数 1年前期は1，1年後期は2, ... 4年後期は8といった風に
+  dayOfTheWeek: String, // Mon, Tues ... Sat
+  period: Number,
 });
 
 module.exports = mongoose.model('Subject', subjectSchema);
