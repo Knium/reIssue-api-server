@@ -5,7 +5,12 @@ const User = require('../models/user.model');
  * @returns {User}
  */
 function get(req, res) {
-  return res.json(req.user);
+  User.find({}).exec()
+  .then(
+      (users) => {
+        res.json(users);
+      },
+  );
 }
 
 /**
