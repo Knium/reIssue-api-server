@@ -1,15 +1,12 @@
 "use strict";
 
 const express = require("express");
+const userCtrl = require("../controllers/user.controller");
 
-// eslint-disable-next-line new-cap
-const router = express.Router();
-const dummy = {
-    username: "test"
-};
+const router = express.Router(); // eslint-disable-line new-cap
 
-router.get("/", (req, res) => {
-    res.json(dummy);
-});
+router.route("/")
+    .get(userCtrl.get)
+    .post(userCtrl.create);
 
 module.exports = router;
