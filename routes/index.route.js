@@ -1,14 +1,10 @@
-"use strict";
+const express = require('express');
+const userRouter = require('./user.route');
 
-const express = require("express");
-
-// eslint-disable-next-line new-cap
-const router = express.Router();
-const userRouter = require("./user.route");
-
-router.get("/", (req, res) => {
-    res.json({ title: "Express" });
+const router = express.Router(); // eslint-disable-line new-cap
+router.get('/', (req, res) => {
+  res.json({ title: 'Express' });
 });
-router.use("/user", userRouter);
+router.use('/user', userRouter);
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const User = require("../models/user.model");
+const User = require('../models/user.model');
 
 /**
  * Get user
@@ -13,7 +13,6 @@ function get(req, res) {
  * @returns {User}
  */
 function create(req, res, next) {
-
     // todo: Twitter認証を超えたら登録できるようにする．
     const body = req.body;
     const user = new User({
