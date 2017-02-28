@@ -7,6 +7,7 @@
     },
     "rules": {
         "strict": "off",
-        "valid-jsdoc": "off"
+        "valid-jsdoc": "off",
+        "lines-around-comment": "off"
     }
 }
