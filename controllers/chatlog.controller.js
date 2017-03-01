@@ -1,5 +1,5 @@
 const ChatLog = require('../models/chatlog.model');
-const ObjectId = require('mongoose').SchemaTypes.ObjectId;
+const ObjectId = require('mongoose').Types.ObjectId;
 
 function get(req, res) {
   ChatLog.find({}).exec()
@@ -7,12 +7,11 @@ function get(req, res) {
       (chatlogs) => { res.json(chatlogs); });
 }
 
-function create(msg) {
-  console.log(msg);
+function create(id, msg, speaker) {
   const chat = new ChatLog({
-    subject: ObjectId('58b5550314d5f1260bed8575'),
+    subject: ObjectId(id),
     created: Date.now(),
-    speaker: ObjectId('58b5550314d5f1260bed8575'),
+    speaker: ObjectId(speaker),
     text: msg,
   });
   chat.save()
