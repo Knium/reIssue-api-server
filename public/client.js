@@ -10,7 +10,7 @@
   };
   form.onsubmit = function() {
     var input = document.querySelector('.input');
-    var text = `reIssueWSChat://58b5550314d5f1260bed8575/?text=${input.value}`;
+    var text = `reIssueWSChat://58b5550314d5f1260bed8575/?text=${input.value}&speaker=111111111111111111111111`;
     ws.send(text);
     input.value = '';
     input.focus();
