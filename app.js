@@ -20,26 +20,37 @@ const room = {};
 const subjectList = subjectCtrl._get();
 subjectList
   .then((subjects) => {
-    subjects.forEach((elm) => {
-      room[elm._id.toString()] = [];
+    subjects.forEach((subjectId) => {
+      room[subjectId._id.toString()] = {}; // 科目の数だけroomが生まれる．
     });
     app.ws('/api/chatlog', (ws) => {
       ws.on('message', (msg) => {
+        const connectingKey = ws.upgradeReq.headers['sec-websocket-key'];
         const urlParsed = url.parse(msg);
         if (urlParsed.protocol === 'reissuewsconnect:') { // 初期接続
-          room[urlParsed.host].push({ id: ws._ultron.id, ws }); // ルームに突っ込む
+          room[urlParsed.host][connectingKey] = { ws }; // ルームに突っ込む
         } else if (urlParsed.protocol === 'reissuewschat:') { // チャットが送られてきたら
           const query = querystring.parse(urlParsed.query);
           chatCtrl.create(urlParsed.host, query.text, query.speaker);
-          Object.keys(room).forEach((subjectId) => {
-            if (subjectId === urlParsed.host) {
-              room[subjectId].forEach((socket) => {
-                socket.ws.send(query.text);
+          Object.keys(room).forEach((sSubjectId) => { // チャットが送られてきたら同じ部屋の人にのみ送る．
+            if (sSubjectId === urlParsed.host) {
+              Object.keys(room[sSubjectId]).forEach((socket) => {
+                room[sSubjectId][socket].ws.send(query.text);
               });
             }
           });
         } else {
+          console.log('Unexpected Websocket was sent');
         }
+      });
+
+      ws.on('close', () => {
+        const disconnectedKey = ws.upgradeReq.headers['sec-websocket-key'];
+        Object.keys(room).forEach((sSubjectId) => {
+          if (disconnectedKey in room[sSubjectId]) {
+            delete room[sSubjectId][disconnectedKey];
+          }
+        });
       });
     });
   });
