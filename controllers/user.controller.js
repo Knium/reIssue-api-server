@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 /**
  * Get user
@@ -35,4 +36,14 @@ function create(req, res, next) {
   .catch(e => next(e));
 }
 
-module.exports = { get, create };
+function getUserInfo(req, res) {
+  User.findById({ _id: ObjectId(req.params.id) })
+  .then(
+    (user) => { res.json(user); });
+}
+
+module.exports = {
+  get,
+  create,
+  getUserInfo,
+};
