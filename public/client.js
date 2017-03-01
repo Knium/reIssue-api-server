@@ -3,6 +3,9 @@
   var ws = new WebSocket(HOST);
   const room = { 0: '58b552de14d5f1260bed8574', 1: '58b5550314d5f1260bed8575' };
   const rand = Math.floor( Math.random() * 2);
+  const subject = {0: '線形代数', 1: '微積分'};
+  const title = document.getElementById('title');
+  title.textContent = subject[rand];
   var form = document.querySelector('.form');
   console.log(room[rand]);
   ws.onopen = function () { // 接続を確認してからルーム別用の識別子msgを送る．

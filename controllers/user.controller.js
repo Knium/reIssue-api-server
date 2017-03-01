@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 /**
  * Get user
@@ -15,9 +16,16 @@ function get(req, res) {
  */
 function create(req, res, next) {
     // todo: Twitter認証を超えたら登録できるようにする．
-  const body = req.body;
   const user = new User({
-    username: body.username,
+    username: req.username,
+    taking: {
+      Mon: [null, null, null, null, null, null, null],
+      Tue: [null, null, null, null, null, null, null],
+      Wed: [null, null, null, null, null, null, null],
+      Thu: [null, null, null, null, null, null, null],
+      Fri: [null, null, null, null, null, null, null],
+      Sat: [null, null, null, null, null, null, null],
+    },
     completed: [],
     failedClass: [],
     created: Date.now(),
@@ -28,4 +36,14 @@ function create(req, res, next) {
   .catch(e => next(e));
 }
 
-module.exports = { get, create };
+function getUserInfo(req, res) {
+  User.findById({ _id: ObjectId(req.params.id) })
+  .then(
+    (user) => { res.json(user); });
+}
+
+module.exports = {
+  get,
+  create,
+  getUserInfo,
+};
