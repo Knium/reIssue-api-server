@@ -26,11 +26,18 @@ subjectList
     app.ws('/api/chatlog', (ws) => {
       ws.on('message', (msg) => {
         const urlParsed = url.parse(msg);
-        if (urlParsed.protocol === 'reissuewsconnect:') {
+        if (urlParsed.protocol === 'reissuewsconnect:') { // 初期接続
           room[urlParsed.host].push({ id: ws._ultron.id, ws }); // ルームに突っ込む
-        } else if (urlParsed.protocol === 'reissuewschat:') {
+        } else if (urlParsed.protocol === 'reissuewschat:') { // チャットが送られてきたら
           const query = querystring.parse(urlParsed.query);
           chatCtrl.create(urlParsed.host, query.text, query.speaker);
+          Object.keys(room).forEach((subjectId) => {
+            if (subjectId === urlParsed.host) {
+              room[subjectId].forEach((socket) => {
+                socket.ws.send(query.text);
+              });
+            }
+          });
         } else {
         }
       });
