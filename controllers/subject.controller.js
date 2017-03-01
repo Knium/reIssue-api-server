@@ -6,4 +6,8 @@ function get(req, res) {
       (subjects) => { res.json(subjects); });
 }
 
-module.exports = { get };
+function _get() {
+  return Subject.find({}).exec();
+}
+
+module.exports = { get, _get };
