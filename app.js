@@ -23,7 +23,7 @@ subjectList
     subjects.forEach((subjectId) => {
       room[subjectId._id.toString()] = {}; // 科目の数だけroomが生まれる．
     });
-    app.ws('/api/chatlog', (ws) => {
+    app.ws('/api/chat/send', (ws) => {
       ws.on('message', (msg) => {
         const connectingKey = ws.upgradeReq.headers['sec-websocket-key'];
         const urlParsed = url.parse(msg);
