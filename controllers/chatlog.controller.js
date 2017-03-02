@@ -19,4 +19,15 @@ function create(id, msg, speaker) {
    .catch(e => console.log(e));
 }
 
-module.exports = { get, create };
+function getBySubjectId(req, res) {
+  console.log(req.params.subjectId);
+  ChatLog.find({ subject: ObjectId(req.params.subjectId) }).exec()
+  .then(
+    (chatLogs) => { res.json(chatLogs); });
+}
+
+module.exports = {
+  get,
+  create,
+  getBySubjectId,
+};
