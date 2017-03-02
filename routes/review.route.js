@@ -7,4 +7,7 @@ router.route('/')
     .get(reviewCtrl.get)
     .post(reviewCtrl.create);
 
+router.route('/:id')
+  .get(reviewCtrl.getReviewsBySubject);
+
 module.exports = router;
