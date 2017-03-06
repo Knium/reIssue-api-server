@@ -5,7 +5,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const chatLogSchema = new mongoose.Schema({
   subject: ObjectId,
   created: { type: Date, default: Date.now },
-  speaker: ObjectId, // 発言者
+  speaker: String, // 発言者
   text: { type: String, required: true },
 });
 

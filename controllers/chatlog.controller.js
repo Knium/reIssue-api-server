@@ -20,7 +20,6 @@ function create(id, msg, speaker) {
 }
 
 function getBySubjectId(req, res) {
-  console.log(req.params.subjectId);
   ChatLog.find({ subject: ObjectId(req.params.subjectId) }).exec()
   .then(
     (chatLogs) => { res.json(chatLogs); });

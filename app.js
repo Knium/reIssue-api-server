@@ -3,6 +3,7 @@ const app = express(); // eslint-disable-line
 const path = require('path');
 const logger = require('morgan');
 const url = require('url');
+const bodyParser = require('body-parser');
 const querystring = require('querystring');
 const index = require('./routes/index.route');
 const serveStatic = require('serve-static');
@@ -10,6 +11,8 @@ const expressWs = require('express-ws')(app); // eslint-disable-line no-unused-v
 const subjectCtrl = require('./controllers/subject.controller');
 const chatCtrl = require('./controllers/chatlog.controller');
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
