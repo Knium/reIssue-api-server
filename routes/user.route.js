@@ -7,7 +7,8 @@ router.route('/')
     .get(userCtrl.get)
     .post(userCtrl.create);
 
-router.route('/:id')
-  .get(userCtrl.getUserInfo);
+router.route('/:_id')
+  .get(userCtrl.getUserInfo)
+  .post(userCtrl.update);
 
 module.exports = router;

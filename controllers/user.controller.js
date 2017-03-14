@@ -42,8 +42,14 @@ function getUserInfo(req, res) {
     (user) => { res.json(user); });
 }
 
+function update(req, res) {
+  User.update().exec()
+  .then((result) => { res.json(result); });
+}
+
 module.exports = {
   get,
   create,
   getUserInfo,
+  update,
 };
