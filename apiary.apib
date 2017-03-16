@@ -3,78 +3,65 @@ HOST: http://polls.apiblueprint.org/
 
 # ReIssue
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+# Group ユーザー
 
-## Questions Collection [/questions]
+## ユーザー [/api/user/]
 
-### List All Questions [GET]
+### TOPページからTwitter認証後の初期ユーザー登録API [POST]
 
-+ Response 200 (application/json)
+- enteredYear: 入学年度
+- name: 名前
+- course: "J" "I" "M" "S", "K",  "1", "2", "3", "KN"
+- optionalCourse: 最大4つまで，一つ目の要素は1年時のクラス，二つ目の要素は2年時のクラス，三つ目以降の要素は専攻コース
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+リクエストが正常だった場合，その科とコースのデフォルトの時間割が飛んでくる
 
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ Request (application/json)
+- Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "enteredYear": 2015,
+            "name": "nersonu",
+            "course": "I",
+            "optionalCource": [3, 1, 3]
+        }
+        
+- Response 200 (applicaton/json)
+
+        {
+            "_id": "58c9e58fc9281e61f9a3ca1a",
+            "name": "I3",
+            "Mon": ["微積分", "線形代数", null, null, null, null, null],
+            "Tue": [null, null, "基礎プロ", null, null, null, null],
+            "Wed": [null, null, "ソフトウェア工学", null, null, null, null],
+            "Thu": [null, null, null, null, null, "計算機工学", null],
+            "Fri": [null, "プログラミング言語論", null, "統計学", null, null, null],
+            "Sat": [null, null, null, null, null, null, null]
         }
 
-+ Response 201 (application/json)
 
-    + Headers
+## ユーザー [/api/user/{?_id}]
 
-            Location: /questions/2
+### チャット画面の左側の情報API [GET]
 
-    + Body
+- 空きコマはnullとして表現される'
+- 後ろのパラメータにユーザーの_idの文字列をつけないといけない
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+- Request
+    
+- Parameters:
+    - _id: 58b5179a82e96efabf76866f (string, required) - ユーザのユニークID
+    
+- Response 200 (application/json)
+
+        {
+            "_id": "58b5179a82e96efabf76866f",
+            "name": "テスト太郎",
+            "taking": {
+                "Mon": ["微積分", "線形代数", null, null, null, null, null],
+                "Tue": [null, null, "基礎プロ", null, null, null, null],
+                "Wed": [null, null, "ソフトウェア工学", null, null, null, null],
+                "Thu": [null, null, null, null, null, "計算機工学", null],
+                "Fri": [null, "プログラミング言語論", null, "統計学", null, null, null],
+                "Sat": [null, null, null, null, null, null, null]
+                }
+        }
