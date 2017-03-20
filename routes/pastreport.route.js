@@ -3,7 +3,7 @@ const express = require('express');
 const multer = require('multer');
 
 const router = express.Router(); // eslint-disable-line new-cap
-const upload = multer({ dest: 'uploaded' });
+const upload = multer({ dest: 'public/kakorepo' });
 
 router.route('/')
     .get(pastReportCtrl.get)
