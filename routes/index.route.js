@@ -3,6 +3,7 @@ const userRouter = require('./user.route');
 const subjectRouter = require('./subject.route');
 const reviewRouter = require('./review.route');
 const chatLogRouter = require('./chatlog.route');
+const pastReportRouter = require('./pastreport.route');
 
 const router = express.Router(); // eslint-disable-line new-cap
 router.get('/', (req, res) => {
@@ -12,5 +13,6 @@ router.use('/user', userRouter);
 router.use('/subject', subjectRouter);
 router.use('/review', reviewRouter);
 router.use('/chatlog', chatLogRouter);
+router.use('/pastreport', pastReportRouter);
 
 module.exports = router;
