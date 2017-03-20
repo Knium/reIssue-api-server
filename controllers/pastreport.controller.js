@@ -1,5 +1,6 @@
 const PastReport = require('../models/pastreport.model');
 const ObjectId = require('mongoose').Types.ObjectId;
+const Subject = require('../models/subject.model');
 
 function get(req, res) {
   PastReport.find({})
@@ -12,7 +13,15 @@ function upload(req, res) {
     path: req.file.path,
   });
   pastReport.save()
-  .then((saved) => { res.json(saved); });
+  .then((savedReport) => {
+    res.json(savedReport);
+    Subject.findById(ObjectId(req.body.subjectId))
+      .then((subject) => {
+        console.log(subject);
+        subject.pastReport.push(ObjectId(pastReport._id));
+        subject.save();
+      });
+  });
 }
 
 module.exports = {
