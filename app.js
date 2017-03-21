@@ -5,6 +5,7 @@ const logger = require('morgan');
 const url = require('url');
 const cors = require('cors');
 const querystring = require('querystring');
+const bodyParser = require('body-parser');
 const index = require('./routes/index.route');
 const serveStatic = require('serve-static');
 const expressWs = require('express-ws')(app); // eslint-disable-line no-unused-vars
@@ -12,6 +13,7 @@ const subjectCtrl = require('./controllers/subject.controller');
 const chatCtrl = require('./controllers/chatlog.controller');
 
 app.use(cors());
+app.use(bodyParser.json());
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -30,7 +32,6 @@ subjectList
         const connectingKey = ws.upgradeReq.headers['sec-websocket-key'];
         const urlParsed = url.parse(msg);
         if (urlParsed.protocol === 'reissuewsconnect:') { // 初期接続
-          room[urlParsed.host] = {};
           room[urlParsed.host][connectingKey] = { ws }; // ルームに突っ込む
         } else if (urlParsed.protocol === 'reissuewschat:') { // チャットが送られてきたら
           const query = querystring.parse(urlParsed.query);
