@@ -16,12 +16,12 @@ function get(req, res) {
  */
 function create(req, res) {
     // todo: Twitter認証を超えたら登録できるようにする．
+    console.log(req.body);
   const user = new User({
     username: req.body.username,
     taking: {},
-    completed: [],
-    failedClass: [],
-    created: Date.now(),
+    enteredYear: req.body.enteredYear,
+    course: req.body.course,
   });
 
   user.save()
