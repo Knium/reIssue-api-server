@@ -15,8 +15,7 @@ function get(req, res) {
  * @returns {User}
  */
 function create(req, res) {
-    // todo: Twitter認証を超えたら登録できるようにする．
-    console.log(req.body);
+  // todo: Twitter認証を超えたら登録できるようにする．
   const user = new User({
     username: req.body.username,
     taking: {},
@@ -29,7 +28,7 @@ function create(req, res) {
 }
 
 function getUserInfo(req, res) {
-  User.findById({ _id: ObjectId(req.params.id) })
+  User.findById({ _id: ObjectId(req.params._id) })
   .then(
     (user) => { res.json(user); });
 }
