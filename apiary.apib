@@ -11,8 +11,7 @@ HOST: http://polls.apiblueprint.org/
 
 - enteredYear: 入学年度
 - name: 名前
-- course: "J" "I" "M" "S", "K",  "1", "2", "3", "KN"
-- optionalCourse: 最大4つまで，一つ目の要素は1年時のクラス，二つ目の要素は2年時のクラス，三つ目以降の要素は専攻コース
+- course: コース Media MI CS
 
 リクエストが正常だった場合，その科とコースのデフォルトの時間割が飛んでくる
 
@@ -21,15 +20,14 @@ HOST: http://polls.apiblueprint.org/
         {
             "enteredYear": 2015,
             "name": "nersonu",
-            "course": "I",
-            "optionalCource": [3, 1, 3]
+            "course": "MI"
         }
         
 - Response 200 (applicaton/json)
 
         {
             "_id": "58c9e58fc9281e61f9a3ca1a",
-            "name": "I3",
+            "name": "Media",
             "Mon": ["微積分", "線形代数", null, null, null, null, null],
             "Tue": [null, null, "基礎プロ", null, null, null, null],
             "Wed": [null, null, "ソフトウェア工学", null, null, null, null],
@@ -40,6 +38,26 @@ HOST: http://polls.apiblueprint.org/
 
 
 ## ユーザー [/api/user/{?_id}]
+
+### ユーザーが履修している科目を登録するAPI[POST]
+
+- Request (applicaiton/json)
+
+        {
+            "user_id": "58b5179a82e96efabf76866f",
+            "taking": {
+                "Mon": ["微積分", "線形代数", null, null, null, null, null],
+                "Tue": [null, null, "基礎プロ", null, null, null, null],
+                "Wed": [null, null, "ソフトウェア工学", null, null, null, null],
+                "Thu": [null, null, null, null, null, "計算機工学", null],
+                "Fri": [null, "プログラミング言語論", null, "統計学", null, null, null],
+                "Sat": [null, null, null, null, null, null, null]
+                }
+        }
+        
+- Response 200 (application/json)
+
+
 
 ### チャット画面の左側の情報API [GET]
 
@@ -65,3 +83,161 @@ HOST: http://polls.apiblueprint.org/
                 "Sat": [null, null, null, null, null, null, null]
                 }
         }
+
+# Group 科目
+## 科目 [/api/subject/]
+
+### 全科目返す [GET]
+
+- Request
+
+- Response 200 (application/json)
+
+        [
+            {
+                "_id":"58d0dea52c0663e94d47e1a6",
+                "name":"グラフとネットワーク",
+                "dayOfWeek":"Mon",
+                "period":2,
+                "course":["CS","MI"]
+            },
+            {
+                "_id":"58d0dea52c0663e94d47e1a7",
+                "name":"情報数理工学実験第一",
+                "dayOfWeek":"Mon",
+                "period":3,"course":["MI"]
+            }
+        ]
+
+
+## 特定のコースのデフォルト時間割を返す [/api/subject/getByCourse/?{course}]
+
+### 特定のコースの科目だけ返す [GET]
+
+- Request
+
+    - Header
+
+            Authorization: $ACCESS_TOKEN
+
+- Parameters
+    - course: MI(string, required) - Media, MI, CS に対応
+
+- Response 200 (application/json)
+
+        {
+            "Fri": [
+                null, 
+                null, 
+                {
+                    "_id": "58d0dea72c0663e94d47e1b6", 
+                    "name": "ヒューマンインタフェース"
+                }, 
+                {
+                    "_id": "58d0dea72c0663e94d47e1b7", 
+                    "name": "オートマトン理論"
+                }, 
+                null, 
+                null, 
+                null
+            ], 
+            "Mon": [
+                null, 
+                {
+                    "_id": "58d0dea52c0663e94d47e1a6", 
+                    "name": "グラフとネットワーク"
+                }, 
+                {
+                    "_id": "58d0dea52c0663e94d47e1a7", 
+                    "name": "情報数理工学実験第一"
+                }, 
+                {
+                    "_id": "58d0dea52c0663e94d47e1a8", 
+                    "name": "情報数理工学実験第一"
+                }, 
+                null, 
+                null, 
+                null
+            ], 
+            "Thu": [
+                null, 
+                {
+                    "_id": "58d0dea72c0663e94d47e1b3", 
+                    "name": "プログラム言語論"
+                }, 
+                {
+                    "_id": "58d0dea72c0663e94d47e1b4", 
+                    "name": "アルゴリズム論第一"
+                }, 
+                {
+                    "_id": "58d0dea72c0663e94d47e1b5", 
+                    "name": "Technical English"
+                }, 
+                null, 
+                null, 
+                null
+            ], 
+            "Tue": [
+                null, 
+                {
+                    "_id": "58d0dea62c0663e94d47e1ab", 
+                    "name": "数値解析"
+                }, 
+                {
+                    "_id": "58d0dea62c0663e94d47e1ac", 
+                    "name": "論理設計学"
+                }, 
+                {
+                    "_id": "58d0dea62c0663e94d47e1ad", 
+                    "name": "データベース論"
+                }, 
+                null, 
+                null, 
+                null
+            ], 
+            "Wed": [
+                null, 
+                {
+                    "_id": "58d0dea62c0663e94d47e1ae", 
+                    "name": "言語処理系論"
+                }, 
+                {
+                    "_id": "58d0dea62c0663e94d47e1af", 
+                    "name": "情報数理工学実験第一"
+                }, 
+                {
+                    "_id": "58d0dea62c0663e94d47e1b0", 
+                    "name": "情報数理工学実験第一"
+                }, 
+                null, 
+                null, 
+                null
+            ]
+        }
+
+## m曜日n限な科目を全て返す [/api/subject/getByDayAndPeriod/{?period,dayOfWeek}]
+
+### m曜日n限な科目を全て返す [GET]
+
+- Request
+
+    - Header
+
+            Authorization: $ACCESS_TOKEN
+
+- Parameters
+    - period: 2(Number, required) - 1~7
+    - dayOfWeek: Tue(string, required) - Mon, Tue, Wed, Thu, Fri, Sat
+
+- Response 200 (application/json)
+
+        [
+            {
+                "_id": "58d0dea62c0663e94d47e1ab", 
+                "name": "数値解析"
+            }, 
+            {
+                "_id": "58d0dedd2c0663e94d47e1bd", 
+                "name": "プログラミング言語実験"
+            }
+        ]
