@@ -241,3 +241,35 @@ HOST: http://polls.apiblueprint.org/
                 "name": "プログラミング言語実験"
             }
         ]
+
+# Group チャット
+
+## チャットログ [/api/chatlog/{subjectId}]
+
+### 科目でチャットログ取得 [GET]
+
+- Request
+
+- Parameters 
+    - subjectId: 58b552de14d5f1260bed8574 (string, required) - 科目ID
+    
+- Response 200 (application/json)
+
+        [
+          {
+            "_id": "58d0b14a3801831981ce5bf1",
+            "subject": "58b552de14d5f1260bed8574",
+            "speaker": "111111111111111111111111",
+            "text": "必修落とした😭",
+            "__v": 0,
+            "created": "2017-03-21T04:51:22.903Z"
+          },
+          {
+            "_id": "58d0b1503801831981ce5bf2",
+            "subject": "58b552de14d5f1260bed8574",
+            "speaker": "111111111111111111111111",
+            "text": "うぇーい",
+            "__v": 0,
+            "created": "2017-03-21T04:51:28.453Z"
+          }
+        ]
