@@ -24,7 +24,7 @@ function getByCourse(req, res) {
         };
         subjects.map((subject) => {
           subject.course.map((type) => {
-            if (req.body.course === type) returnJSON[subject.dayOfWeek][subject.period - 1] = { name: subject.name, _id: subject._id };
+            if (req.query.course === type) returnJSON[subject.dayOfWeek][subject.period - 1] = { name: subject.name, _id: subject._id };
             });
         });
         res.json(returnJSON);

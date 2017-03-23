@@ -7,7 +7,7 @@ router.route('/')
   .get(subjectCtrl.get);
 
 router.route('/getByCourse')
-  .post(subjectCtrl.getByCourse);
+  .get(subjectCtrl.getByCourse);
 
 router.route('/getByDayAndPeriod')
   .get(subjectCtrl.getByDayAndPeriod);
