@@ -31,6 +31,7 @@ subjectList
       ws.on('message', (msg) => {
         const connectingKey = ws.upgradeReq.headers['sec-websocket-key'];
         const urlParsed = url.parse(msg);
+        console.log(room[urlParsed.host]);
         if (urlParsed.protocol === 'reissuewsconnect:') { // 初期接続
           room[urlParsed.host][connectingKey] = { ws }; // ルームに突っ込む
         } else if (urlParsed.protocol === 'reissuewschat:') { // チャットが送られてきたら
@@ -59,4 +60,4 @@ subjectList
     });
   });
 
-app.listen(3000, '0.0.0.0');
+app.listen(3000);
