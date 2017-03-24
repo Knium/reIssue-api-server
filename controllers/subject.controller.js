@@ -39,7 +39,6 @@ function getByCourse(req, res) {
 function getByDayAndPeriod(req, res) {
   const period = parseInt(req.query.period, 10);
   const dayOfWeek = req.query.dayOfWeek;
-  console.log(period);
   Subject.find({ period, dayOfWeek }, { course: 0, period: 0, dayOfWeek: 0 }).exec()
   .then(
     (subjects) => {

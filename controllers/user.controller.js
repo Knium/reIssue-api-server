@@ -17,7 +17,7 @@ function get(req, res) {
 function create(req, res) {
   // todo: Twitter認証を超えたら登録できるようにする．
   const user = new User({
-    username: req.body.username,
+    name: req.body.name,
     taking: {},
     enteredYear: req.body.enteredYear,
     course: req.body.course,
