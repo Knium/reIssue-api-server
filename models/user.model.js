@@ -1,6 +1,5 @@
 const mongoose = require('../config');
 
-const ObjectId = mongoose.Schema.Types.ObjectId;
 const userSchema = new mongoose.Schema({
   name: String,
   taking: { // 月曜1限の履修している科目を見るときは user.taking.mon[0] みたいな, 履修していないところはnullにする．
