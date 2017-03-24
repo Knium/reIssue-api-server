@@ -13,11 +13,10 @@ function upload(req, res) {
     path: req.file.path,
   });
   pastReport.save()
-  .then((savedReport) => {
-    res.redirect(301, 'https://knium.net')
+  .then(() => {
+    res.redirect(301, 'http://knium.net:5000/user.html');
     Subject.findById(ObjectId(req.body.subjectId))
       .then((subject) => {
-        console.log(subject);
         subject.pastReport.push(ObjectId(pastReport._id));
         subject.save();
       });
