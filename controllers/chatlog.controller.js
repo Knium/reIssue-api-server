@@ -7,20 +7,18 @@ function get(req, res) {
       (chatlogs) => { res.json(chatlogs); });
 }
 
-function create(id, msg, speaker) {
+function create(id, text, speaker, speakerName) {
   const chat = new ChatLog({
     subject: ObjectId(id),
     created: Date.now(),
     speaker: ObjectId(speaker),
-    text: msg,
+    text,
+    speakerName,
   });
-  chat.save()
-   .then(savedChat => console.log(savedChat))
-   .catch(e => console.log(e));
+  chat.save();
 }
 
 function getBySubjectId(req, res) {
-  console.log(req.params.subjectId);
   ChatLog.find({ subject: ObjectId(req.params.subjectId) }).exec()
   .then(
     (chatLogs) => { res.json(chatLogs); });

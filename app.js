@@ -31,16 +31,15 @@ subjectList
       ws.on('message', (msg) => {
         const connectingKey = ws.upgradeReq.headers['sec-websocket-key'];
         const urlParsed = url.parse(msg);
-        console.log(room[urlParsed.host]);
         if (urlParsed.protocol === 'reissuewsconnect:') { // 初期接続
           room[urlParsed.host][connectingKey] = { ws }; // ルームに突っ込む
         } else if (urlParsed.protocol === 'reissuewschat:') { // チャットが送られてきたら
           const query = querystring.parse(urlParsed.query);
-          chatCtrl.create(urlParsed.host, query.text, query.speaker);
+          chatCtrl.create(urlParsed.host, query.text, query.speakerId, query.speakerName);
           Object.keys(room).forEach((sSubjectId) => { // チャットが送られてきたら同じ部屋の人にのみ送る．
             if (sSubjectId === urlParsed.host) {
               Object.keys(room[sSubjectId]).forEach((socket) => {
-                room[sSubjectId][socket].ws.send(query.text);
+                room[sSubjectId][socket].ws.send(`{"text":"${query.text}", "speakerName":"${query.speakerName}" }`);
               });
             }
           });

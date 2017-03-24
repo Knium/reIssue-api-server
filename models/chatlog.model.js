@@ -7,6 +7,7 @@ const chatLogSchema = new mongoose.Schema({
   created: { type: Date, default: Date.now },
   speaker: ObjectId, // 発言者
   text: { type: String, required: true },
+  speakerName: String,
 });
 
 module.exports = mongoose.model('ChatLog', chatLogSchema);

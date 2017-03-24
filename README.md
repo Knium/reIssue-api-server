@@ -49,7 +49,7 @@ const userId = "878faea" // ユーザーのIDの一例
 
 form.onsubmit = () => {
   const input = document.querySelector('.input');
-  const text = `reIssueWSChat://${subjectId}/?text=${input.value}&speaker=${userId}`;
+  const text = `reIssueWSChat://${subjectId}/?text=${input.value}&speaker=${userId}&speakerName=${userName}`;
   ws.send(text);
   input.value = '';
   input.focus();
