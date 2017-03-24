@@ -34,9 +34,10 @@ function getUserInfo(req, res) {
 }
 
 function update(req, res) {
-  User.update().exec()
+  User.update({ _id: ObjectId(req.params._id) }, { $set: req.body })
   .then((result) => { res.json(result); });
 }
+
 
 module.exports = {
   get,
