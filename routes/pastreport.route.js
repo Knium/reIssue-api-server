@@ -9,4 +9,7 @@ router.route('/')
     .get(pastReportCtrl.get)
     .post(upload.single('upName'), pastReportCtrl.upload);
 
+router.route('/getbysubjectId')
+  .get(pastReportCtrl.getBySubjectId);
+
 module.exports = router;

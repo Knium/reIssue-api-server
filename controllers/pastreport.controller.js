@@ -14,7 +14,7 @@ function upload(req, res) {
   });
   pastReport.save()
   .then((savedReport) => {
-    res.json(savedReport);
+    res.redirect(301, 'https://knium.net')
     Subject.findById(ObjectId(req.body.subjectId))
       .then((subject) => {
         console.log(subject);
@@ -24,7 +24,13 @@ function upload(req, res) {
   });
 }
 
+function getBySubjectId(req, res) {
+  Subject.find({ subjectId: req.query._id })
+  .then((subjects) => { res.json(subjects); });
+}
+
 module.exports = {
   get,
   upload,
+  getBySubjectId,
 };
