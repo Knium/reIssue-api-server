@@ -11,7 +11,6 @@ function _get() {
 }
 
 function getByCourse(req, res) {
-  console.log(req.body);
   Subject.find({}).exec()
     .then(
       (subjects) => {
