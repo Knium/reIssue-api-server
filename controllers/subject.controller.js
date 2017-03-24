@@ -26,8 +26,8 @@ function getByCourse(req, res) {
           Thu: [null, null, null, null, null, null, null],
           Fri: [null, null, null, null, null, null, null],
         };
-        subjects.map((subject) => {
-          subject.course.map((type) => {
+        subjects.forEach((subject) => {
+          subject.course.forEach((type) => {
             // eslint-disable-next-line max-len
             if (req.query.course === type) returnJSON[subject.dayOfWeek][subject.period - 1] = { name: subject.name, _id: subject._id };
           });
