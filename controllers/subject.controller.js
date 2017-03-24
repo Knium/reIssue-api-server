@@ -10,6 +10,11 @@ function _get() {
   return Subject.find({}).exec();
 }
 
+function getById(req, res) {
+  Subject.findById(req.params._id).exec()
+  .then((subject) => { res.json(subject); });
+}
+
 function getByCourse(req, res) {
   Subject.find({}).exec()
     .then(
@@ -46,4 +51,5 @@ module.exports = {
   _get,
   getByCourse,
   getByDayAndPeriod,
+  getById,
 };
