@@ -8,10 +8,13 @@ function get(req, res) {
 }
 
 function upload(req, res) {
-  const path = `${req.file.path.replace(/public/g, '')}.${req.file.originalname.split('.')[1]}`;
+  const extention = req.file.originalname.split('.')[1];
+  const path = `${req.file.path.replace(/public/g, '')}.${extention}`;
+  const filename = `${req.file.filename}.${extention}`;
   const pastReport = new PastReport({
     subjectId: ObjectId(req.body.subjectId),
     path,
+    filename,
   });
   pastReport.save()
   .then(() => {
