@@ -25,7 +25,7 @@ function upload(req, res) {
 }
 
 function getBySubjectId(req, res) {
-  Subject.find({ subjectId: req.query._id })
+  PastReport.find({ subjectId: req.query._id })
   .then((subjects) => { res.json(subjects); });
 }
 
