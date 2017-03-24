@@ -8,7 +8,7 @@ function get(req, res) {
 }
 
 function upload(req, res) {
-  const path = req.file.path.replace(/public/g, "")
+  const path = `${req.file.path.replace(/public/g, '')}.${req.file.originalname.split('.')[1]}`;
   const pastReport = new PastReport({
     subjectId: ObjectId(req.body.subjectId),
     path,
